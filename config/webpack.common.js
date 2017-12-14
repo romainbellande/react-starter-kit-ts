@@ -34,7 +34,7 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin([path.resolve('dist')]),
     HtmlWebpackPluginConfig
   ]
 };

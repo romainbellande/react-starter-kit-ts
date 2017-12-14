@@ -6,17 +6,20 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = merge(common, {
   module: {
-    loaders: [
+    rules: [
       {
-				test: /\.scss?$/,
-				loader: ExtractTextPlugin.extract({
+        test: /\.scss?$/,
+        loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: [{
-            loader: 'css-loader',
-            options: { minimize: true }
-          }, 'sass-loader']
+          use: [
+            {
+              loader: 'css-loader',
+              options: { minimize: true }
+            },
+            'sass-loader'
+          ]
         })
-			}
+      },
     ]
   },
   plugins: [
