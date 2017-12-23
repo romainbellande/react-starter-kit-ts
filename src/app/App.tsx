@@ -5,29 +5,20 @@ import { Provider } from 'react-redux';
 import { Route } from 'react-router';
 import {
   ConnectedRouter,
-  push,
-  routerMiddleware,
-  routerReducer } from 'react-router-redux';
-import { applyMiddleware, combineReducers, createStore } from 'redux';
+  routerMiddleware } from 'react-router-redux';
+import { Store } from 'redux';
+
+import './App.scss';
+import { Home } from './pages';
+import { configureStore } from './redux';
 
 const history = createBrowserHistory();
 const middleware = routerMiddleware(history);
 
-const store = createStore(
-  combineReducers({
-    router: routerReducer,
-  }),
-  applyMiddleware(middleware),
-);
-
-import './App.scss';
-
-import { Home } from './pages';
-
 export class App extends React.Component<{}, {}> {
   public render() {
     return (
-      <Provider store={store}>
+      <Provider store={configureStore(middleware)}>
         <ConnectedRouter history={history}>
           <div>
             <Route exact={true} path="/" component={Home} />
